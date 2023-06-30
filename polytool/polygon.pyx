@@ -3,6 +3,43 @@
 from cpython cimport array
 from libc.math cimport sqrt
 
+def scale_to(list poly, float scalex, float scaley):
+    cdef float x = 0
+    cdef float y = 0
+    cdef list new = []
+    for x, y in poly:
+        new.append((x * scalex, y * scaley))
+    return new
+
+
+def scale_from(list poly, float scalex, float scaley):
+    cdef float x
+    cdef float y
+    cdef list new = []
+    for x, y in poly:
+        new.append((x / scalex, y / scaley))
+    return new
+
+
+def scale_to_(list poly, float scalex, float scaley):
+    cdef int i, n
+    n = len(poly)
+    for i in range(n):
+        x, y = poly[i]
+        poly[i][0] = x * scalex
+        poly[i][1] = y * scaley
+    return poly
+
+
+def scale_from_(list poly, float scalex, float scaley):
+    cdef int i, n
+    n = len(poly)
+    for i in range(n):
+        x, y = poly[i]
+        poly[i][0] = x / scalex
+        poly[i][1] = y / scaley
+    return poly
+
 
 def get_shrink_dist(list poly, float r):
     cdef float A = get_area(poly)
