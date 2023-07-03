@@ -3,8 +3,8 @@ requires = ["setuptools", "cython"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "polytool"
+name = "simpoly"
 version = "0.2.1"
 
 [tool.setuptools.package-dir]
-polytool = "polytool"
+simpoly = "polytool"

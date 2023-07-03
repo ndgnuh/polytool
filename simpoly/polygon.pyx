@@ -1,6 +1,5 @@
 #!python
 #cython: language_level=3
-from cpython cimport array
 from libc.math cimport sqrt
 
 def scale_to(list poly, float scalex, float scaley):
