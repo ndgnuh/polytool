@@ -126,7 +126,7 @@ def offset(list poly, float offset):
         vx, vy = vy, -vx
 
         # normalize the normal vector
-        length = sqrt(vx**2 + vy**2)
+        length = sqrt(vx**2 + vy**2) + 1e-12
         vx, vy = vx / length, vy / length
 
         # Offset endpoints -> offset lines
@@ -142,7 +142,7 @@ def offset(list poly, float offset):
     for i in range(n):
         (x1, y1, x2, y2) = offset_lines[i]
         (x3, y3, x4, y4) = offset_lines[(i + 1) % n]
-        deno = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4) + 1e-6
+        deno = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4) + 1e-12
         x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - x4 * y3)) / deno
         y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - x4 * y3)) / deno
         new_poly.append((x / scale, y / scale))
