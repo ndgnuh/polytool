@@ -100,12 +100,14 @@ def get_length(list poly):
 
 
 def offset(list poly, float offset):
-    cdef int i, n, scale
+    cdef int i, n, scale, m
     cdef float x1, y1, x2, y2, length, x, y
     cdef list new_poly, offset_lines
 
+
     scale = 1000
     n = len(poly)
+    m = n
     offset = offset * scale
     offset_lines = []
     new_poly = []
@@ -117,6 +119,7 @@ def offset(list poly, float offset):
 
         # Skip if the two endpoints are the same
         if x1 == x2 and y1 == y2:
+            m = m - 1
             continue
 
         # Rescale for accuracy
@@ -143,7 +146,7 @@ def offset(list poly, float offset):
     # Find intersections
     # New poly vertices are the intersection of the offset lines
     # https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
-    for i in range(n):
+    for i in range(m):
         (x1, y1, x2, y2) = offset_lines[i]
         (x3, y3, x4, y4) = offset_lines[(i + 1) % n]
         deno = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4) + 1e-12
