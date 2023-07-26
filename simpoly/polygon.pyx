@@ -115,6 +115,10 @@ def offset(list poly, float offset):
         x1, y1 = poly[i]
         x2, y2 = poly[(i + 1) % n]
 
+        # Skip if the two endpoints are the same
+        if x1 == x2 and y1 == y2:
+            continue
+
         # Rescale for accuracy
         x1 = x1 * scale
         x2 = x2 * scale
@@ -126,7 +130,7 @@ def offset(list poly, float offset):
         vx, vy = vy, -vx
 
         # normalize the normal vector
-        length = sqrt(vx**2 + vy**2) + 1e-12
+        length = sqrt(vx**2 + vy**2)
         vx, vy = vx / length, vy / length
 
         # Offset endpoints -> offset lines
